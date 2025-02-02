@@ -6,10 +6,12 @@
 @import 'izitoast/dist/css/iziToast.min.css';
 @import 'simplelightbox/dist/simple-lightbox.min.css';
 
+
+
 .container {
   padding: 0 16px;
   margin: 0 auto;
-  overflow: hidden;
+  
 }
 
 .search-form {
@@ -80,12 +82,6 @@
   padding: 4px 20px;
 }
 
-.info-list {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  flex-direction: column;
-}
 
 .info-item {
   display: flex;

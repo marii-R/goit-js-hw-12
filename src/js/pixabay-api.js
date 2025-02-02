@@ -1,17 +1,26 @@
-const API_KEY = '48549557-eddb482997c8ef9e0172f80ee';
+import axios from 'axios';
 
-export const fetchImage = query => {
-  const params = new URLSearchParams({
-    key: API_KEY,
-    q: query,
-    image_type: "photo",
-    orientation: "horizontal",
-    safesearch: true,
-  });
-  return fetch(`https://pixabay.com/api/?${params}`).then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-    return response.json();
-  });
+const API_KEY = '48549557-eddb482997c8ef9e0172f80ee';
+const BASE_URL = 'https://pixabay.com/api/';
+const PER_PAGE = 15;
+
+export const fetchImage = async (query, page = 1) => {
+  try {
+    const response = await axios.get(BASE_URL, {
+      params: {
+        key: API_KEY,
+        q: query,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: true,
+        per_page: PER_PAGE,
+        page,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
 };
