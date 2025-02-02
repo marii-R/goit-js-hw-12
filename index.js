@@ -1,30 +1,30 @@
-import{S as f,i as l}from"./assets/vendor-5ObWk2rO.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const a of t.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&n(a)}).observe(document,{childList:!0,subtree:!0});function o(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function n(e){if(e.ep)return;e.ep=!0;const t=o(e);fetch(e.href,t)}})();const m=r=>r.map(s=>{const o=s.tags.split(", ").slice(0,3).join(", ");return`
+import{a as g,S as h,i as a}from"./assets/vendor-DEenWwFD.js";(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))d(t);new MutationObserver(t=>{for(const o of t)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&d(n)}).observe(document,{childList:!0,subtree:!0});function r(t){const o={};return t.integrity&&(o.integrity=t.integrity),t.referrerPolicy&&(o.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?o.credentials="include":t.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function d(t){if(t.ep)return;t.ep=!0;const o=r(t);fetch(t.href,o)}})();const y=s=>s.map(e=>{const r=e.tags.split(", ").slice(0,3).join(", ");return`
         <li class="gallery-card">
-          <a class="gallery-link" href="${s.largeImageURL}">
+          <a class="gallery-link" href="${e.largeImageURL}">
             <img
               class="gallery-img"
-              src="${s.webformatURL}"
-              alt="${o}" 
+              src="${e.webformatURL}"
+              alt="${r}" 
               loading="lazy"
             />
             <div class="info">
               <div class="info-list">
                 <span class="info-item">Likes</span>
-                <span class="info-item-value">${s.likes}</span>
+                <span class="info-item-value">${e.likes}</span>
               </div>
               <div class="info-list">
                 <span class="info-item">Views</span>
-                <span class="info-item-value">${s.views}</span>
+                <span class="info-item-value">${e.views}</span>
               </div>
               <div class="info-list">
                 <span class="info-item">Comments</span>
-                <span class="info-item-value">${s.comments}</span>
+                <span class="info-item-value">${e.comments}</span>
               </div>
               <div class="info-list">
                 <span class="info-item">Downloads</span>
-                <span class="info-item-value">${s.downloads}</span>
+                <span class="info-item-value">${e.downloads}</span>
               </div>
             </div>
           </a>
-        </li>`}).join(""),d="48549557-eddb482997c8ef9e0172f80ee",u=r=>{const s=new URLSearchParams({key:d,q:r,image_type:"photo",orientation:"horizontal",safesearch:!0});return fetch(`https://pixabay.com/api/?${s}`).then(o=>{if(!o.ok)throw new Error(o.status);return o.json()})},p=document.querySelector(".search-form"),g=document.querySelector(".search-input");document.querySelector(".search-btn");const c=document.querySelector(".gallery"),i=document.querySelector(".loader");let h=new f(".gallery a",{captionsData:"alt",captionDelay:250});p.addEventListener("submit",r=>{r.preventDefault();const s=g.value.trim();if(!s){l.warning({message:"Please enter a search term.",position:"topRight",messageColor:"#ffffff",backgroundColor:"#9090ff"});return}c.innerHTML="",i.classList.add("active"),u(s).then(o=>{if(o.hits.length===0){l.info({message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight",messageColor:"#ffffff",backgroundColor:"#ff4141"}),i.classList.remove("active");return}c.insertAdjacentHTML("beforeend",m(o.hits));const e=[...c.querySelectorAll(".gallery-img")].slice(0,10);Promise.all(e.map(t=>new Promise(a=>t.onload=a))),i.classList.remove("active"),h.refresh()}).catch(o=>{i.classList.remove("active"),l.error({message:"Something went wrong, please try again later.",position:"topRight",messageColor:"#ffffff",backgroundColor:"#ff4141"}),console.error("Error fetching data:",o)})});
+        </li>`}).join(""),v="48549557-eddb482997c8ef9e0172f80ee",L="https://pixabay.com/api/",b=15,w=async(s,e=1)=>{try{return(await g.get(L,{params:{key:v,q:s,image_type:"photo",orientation:"horizontal",safesearch:!0,per_page:b,page:e}})).data}catch(r){throw console.error("Error fetching data:",r),r}},S=document.querySelector(".search-form"),C=document.querySelector(".search-input"),u=document.querySelector(".gallery"),m=document.querySelector(".loader"),l=document.querySelector(".load-more-btn");let E=new h(".gallery a",{captionsData:"alt",captionDelay:250}),c="",i=1;const P=15;let f=0;const p=async()=>{try{m.classList.add("active"),l.classList.add("is-hidden");const s=await w(c,i);if(s.hits.length===0){a.info({message:"Sorry, no images found. Try another search!",position:"topRight",messageColor:"#ffffff",backgroundColor:"#ff4141"});return}u.insertAdjacentHTML("beforeend",y(s.hits)),E.refresh(),f=s.totalHits,i*P>=f?a.info({message:"We're sorry, but you've reached the end of search results.",position:"topRight",messageColor:"#ffffff",backgroundColor:"#ff4141"}):l.classList.remove("is-hidden"),R()}catch{a.error({message:"Something went wrong, please try again later.",position:"topRight",messageColor:"#ffffff",backgroundColor:"#ff4141"})}finally{m.classList.remove("active")}};S.addEventListener("submit",s=>{if(s.preventDefault(),c=C.value.trim(),!c){a.warning({message:"Please enter a search term.",position:"topRight",messageColor:"#ffffff",backgroundColor:"#9090ff"});return}u.innerHTML="",i=1,f=0,p()});l.addEventListener("click",()=>{i+=1,p()});const R=()=>{const s=document.querySelector(".gallery-card");if(s){const e=s.getBoundingClientRect().height;window.scrollBy({top:e*2,behavior:"smooth"})}};
 //# sourceMappingURL=index.js.map
